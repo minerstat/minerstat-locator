@@ -1,0 +1,28 @@
+sudo: true
+language: node_js
+node_js:
+  - '9'
+os: osx
+install:
+  - npm install -g node-gyp
+  - npm install -g electron-packager
+  - npm install
+  - electron-packager . locator --overwrite --platform=darwin --arch=x64 --icon=asset/logo.icns --prune=true --out=release-builds
+before_deploy:
+  - cd release-builds/locator-darwin-x64
+  - zip -r minerstat-locator-mac.zip .
+  - git config --local user.name "coinscrow"
+  - git config --local user.email "info@minerstat.com"
+  - if [ -z "$TRAVIS_TAG" ] ; then TRAVIS_TAG=latest; fi
+deploy:
+  provider: releases
+  api_key:
+    secure: BvBe7C1glOsSs0WWnn58gORCwltuF/PPzGhsmaqggqMGaKJ0k2rtEDs9WMiK2LHL6dBShcRAL2EQQwwtwIVumOxhyA6r7PZtz9mBMiejpcJbHjS1oINHKDYqsyVuOiqqmbk0AlgU7xJJBFDNSrcWb8XKrL8wr3xipcreIvCxTh0d/hmsNNlAE+qdk346f1vx/b63JFJamWiFG2tBSJYBNAZkivPVqkipnz8mjqjRs/mkA/UOKXt3PxlOlK3P5QihnmsmgPqb2QVtHNwFsL0nOFX9VCtKfSCW1WoNKPgNcLbQEJ/BeHHKKLoFvEhRzzjaJsSCToRC2f8cBUNpzBheoG0EVqKby98VWNt5SlAimzttoVm5Q5Nx1ftJt1IWnRiZK9xTz2Txw2jQxKBtb3W3BGMgS+jBSQauoqexLekLXS2Did3Ygl76PKQ41UeMol86zYefmtPVZM1PmtX6/3RTvj03yK6Qpot2jFezHt1fp1/0raeqsd8iqxuZITnllIJxrxQ+AmI7YRDpIwfr/skV5gw8iuw6g0kGje3kQzgJ9SfPj/T+bWmB5Rca9IdyQOhaUhuKI+qJrtwtIkgPPpIQNWINDa4l5mUTZK+JCIWUDiuaoitAWJdV74M1PfgnMo1XFtL4g6Liu2VIuOzykr2DYVSZLFNkvff9oYI5PjXnBFg=
+    file: "$TRAVIS_BUILD_DIR/release-builds/locator-darwin-x64/minerstat-locator-mac.zip"
+  skip_cleanup: true
+  overwrite: true
+  prerelease: true
+  draft: false
+  on:
+    tags: false
+    branch: master
