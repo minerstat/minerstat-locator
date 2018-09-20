@@ -14,7 +14,7 @@
   font-family:'Mukta Mahee',sans-serif;
   font-size:14px;
   font-weight:600;
-  -webkit-app-region: drag;
+  -webkit-app-region: no-drag;
 }
 
 [data-tooltip]:before,
@@ -24,7 +24,7 @@
   filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
   pointer-events: none;
-  -webkit-app-region: drag;
+  -webkit-app-region: no-drag;
 }
 
 [data-tooltip]:before {
@@ -46,7 +46,7 @@
   font-weight:600;
   line-height: 1;
   max-width:160px;
-  -webkit-app-region: drag;
+  -webkit-app-region: no-drag;
 }
 
 [data-tooltip]:after {
@@ -62,7 +62,7 @@
   content: " ";
   font-size: 0;
   line-height: 0;
-  -webkit-app-region: drag;
+  -webkit-app-region: no-drag;
 }
 
 [data-tooltip]:hover:before,
@@ -75,7 +75,7 @@
  
 /* GENERAL */
 
-body{background:#f8f9fc;text-align:left;font-weight:300;font-size:16px;line-height:1;color:#46474f;cursor:default;margin:0;width:auto;min-width:320px;font-family:'Mukta Mahee',sans-serif;position:relative;-webkit-user-select: none;overflow:hidden;width:520px;height:400px;}
+body{background:#f8f9fc;text-align:left;font-weight:300;font-size:16px;line-height:1;color:#46474f;cursor:default;margin:0;width:auto;min-width:320px;font-family:'Mukta Mahee',sans-serif;position:relative;-webkit-user-select: none;overflow:hidden;width:520px;height:400px;-webkit-app-region: no-drag;}
 #frame{width:520px;height:400px;position:relative;overflow:hidden;-webkit-app-region: drag;background:#f8f9fc;}
 *{box-sizing:border-box;font-family:'Mukta Mahee',sans-serif;font-weight:300;padding:0;margin:0;vertical-align:baseline;}
 
