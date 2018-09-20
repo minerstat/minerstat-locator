@@ -101,6 +101,7 @@ body{background:#f8f9fc;text-align:left;font-weight:300;font-size:16px;line-heig
 .content p a:hover, .content p a:visited:hover{color:#52cca5;}
 .content .ip_ranges{display:inline-flex;align-items:flex-end;justify-content:center;margin:10px auto -15px auto;width:auto;background:#fff;box-shadow:0px 2px 0px rgba(0,0,0,0.03);border-radius:3px;padding:6px;}
 .content .ip_ranges input{font-family:'Mukta Mahee',sans-serif;font-weight:300;font-size:14px;display:block;width:36px;text-align:left;line-height:1;border:0;border:1px solid #eef1fb;border-radius:2px;padding:6px 4px 6px 4px;margin:0;color:#6b6d7a;text-align:center;}
+.content .ip_ranges input:focus{outline:none !important;border-color:#52cca5;box-shadow:0 0 0 1px #52cca5;border-radius:2px;}
 .content .ip_ranges input:disabled{box-shadow:none;background:#fff;text-align:center;color:#d4d7e1;}
 .content .ip_ranges label{margin:0 5px 0 5px;color:#8d95ab;font-weight:300;font-size:14px;}
 
