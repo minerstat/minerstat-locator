@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-	<title>minerstat - crypto mining monitor & management software</title>
+	<title>Locator by minerstat</title>
 	<meta name="description" content="Minerstat is number-one tool to monitor and manage your crypto mining operation of any size. Includes auto-profit switching and Watchdog swift system alerting.">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
@@ -94,9 +94,19 @@
 	var Export = 0;
     var ipArr = [],
     ExportArr = [];
+    const internalIp = require('internal-ip');
     var IP_PART1 = "192",
 	IP_PART2 = "168",
 	IP_PART3 = "0";
+	internalIp.v4().then(ip => {
+    console.log(ip);
+    //=> '10.0.0.79'
+    var IP = ip.split(".");
+    IP_PART1 = IP[0];
+    IP_PART2 = IP[1];
+	IP_PART3 = IP[2];
+	console.log(IP[0]);
+	});
 	</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../frontend.js"></script>

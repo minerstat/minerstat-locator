@@ -52,6 +52,11 @@ $(function() {
     $('#start').on('click', function() {
         $('#step1').hide();
         $('#step2').show();
+        
+        $('#block8').val(IP_PART1); 
+        $('#block16').val(IP_PART2); 
+        $('#block24').val(IP_PART3); 
+        
     });
 
     $('#continue').on('click', function() {

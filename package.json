@@ -10,7 +10,7 @@
     "package-linux": "electron-packager . locator --overwrite --asar=true --platform=linux --arch=x64 --icon=asset/1024x1024.png --prune=true --out=release-builds",
     "package-pi": "electron-packager . locator --overwrite --asar=true --platform=linux --arch=armv7l --icon=asset/1024x1024.png --prune=true --out=release-builds"
   },
-  "repository": "https://github.com/coinscrow/minerstat-locator",
+  "repository": "https://github.com/minerstat/minerstat-locator",
   "keywords": [
     "minerstat",
     "asic",
@@ -20,14 +20,15 @@
     "networking",
     "export"
   ],
-  "author": "coinscrow",
+  "author": "minerstat OU",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^1.8.4"
+    "electron": "^2.0.10"
   },
   "dependencies": {
     "colors": "^1.3.2",
     "evilscan": "^1.6.1",
+    "internal-ip": "^3.0.1",
     "net": "^1.0.2",
     "path": "^0.12.7",
     "readline": "^1.3.0",
