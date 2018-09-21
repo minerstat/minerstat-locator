@@ -67,7 +67,7 @@ $(function() {
 		IP_PART2 = $('#block16').val();
 		IP_PART3 = $('#block24').val();
 		// Find all device
-		WAITING_LIST(IP_PART1 + "." + IP_PART2 + "." + IP_PART3 + ".X".replace(/X/gi, "0") + "/24");
+		WAITING_LIST(IP_PART1 + "." + IP_PART2 + "." + IP_PART3 + ".X".replace(/X/gi, "0") + "/19");
 		setTimeout(discovery, 1 * 1000);
 		
     });
