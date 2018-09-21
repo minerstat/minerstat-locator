@@ -27,8 +27,8 @@ If you want to create your own JSON file to import workers to your minerstat das
         "worker": "S90001",
         "type": "asic",
         "system": "antminer",
-        "groups": "Area 1",
-        "ip": "192.168.0.05",
+        "groups": "Area1",
+        "ip": "192.168.0.5",
         "ssh-username": "root",
         "ssh-password": "admin"
     },
@@ -36,8 +36,8 @@ If you want to create your own JSON file to import workers to your minerstat das
         "worker": "S90002",
         "type": "asic",
         "system": "antminer",
-        "groups": "Area 1",
-        "ip": "192.168.0.07",
+        "groups": "Area1",
+        "ip": "192.168.0.7",
         "ssh-username": "root",
         "ssh-password": "admin"
     }
