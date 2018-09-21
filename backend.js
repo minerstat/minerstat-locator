@@ -124,7 +124,7 @@ function ASIC_TESTER(workerIP, response, asicNum) {
 
         if (data.toString().includes(".")) {
             // WORKER NAME DETECTED
-            data = data.split('.')[0];
+            data = data.split('.')[1];
         } else {
             data = "";
         }
