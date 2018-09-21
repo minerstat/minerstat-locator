@@ -134,9 +134,9 @@ function ASIC_TESTER(workerIP, response, asicNum) {
 
     // Add to the list, this will be exported
     const workerData = {
-    	"worker": data
+    	"worker": data,
         "type": "asic",
-        "ip": workerIP,
+        "ip": workerIP
     }
     ExportArr.push(workerData);
 
