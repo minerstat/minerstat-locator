@@ -48,6 +48,6 @@ Please, if you are using custom templates, follow the next rules:
 1. `type` must be one of the following: `nvidia`, `amd`, or `asic`.
 2. `system` must be `msos` or `windows` if the type is `nvidia` or `amd`.
 3. `system` must be `antminer`, `baikal`, or `dragonmint` if the type is `asic`.
-4. `groups` must be divided with comma. Group name should not exceed the length of 10 characters.
+4. `groups` must be divided by a comma. Group name should not exceed the length of 10 characters.
 5. `worker` should not exceed the length of 15 characters.
-6. `ssh-username` and `ssh-password` are used only for type `asic` and are not the same as on web interace. Default username/password for `antminer` is `root/admin`, for `baikal` is `admin/root`, and for `dragonmint` is `admin/dragonadmin`.
+6. `ssh-username` and `ssh-password` are used only for type `asic` and are not the same as on web interface. Default username/password for `antminer` is `root/admin`, for `baikal` is `admin/root`, and for `dragonmint` is `admin/dragonadmin`.
