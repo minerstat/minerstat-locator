@@ -23,16 +23,19 @@
   "author": "minerstat OU",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^2.0.10"
+    "electron": "^2.0.14"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "colors": "^1.3.2",
-    "evilscan": "^1.6.1",
+    "evilscan": "^1.7.1",
     "internal-ip": "^3.0.1",
     "net": "^1.0.2",
     "path": "^0.12.7",
     "readline": "^1.3.0",
-    "save-file": "^1.2.1",
+    "request-promise": "^4.2.2",
+    "save": "^2.3.2",
+    "save-file": "^1.3.0",
     "url": "^0.11.0"
   }
 }

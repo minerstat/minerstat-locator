@@ -1,10 +1,13 @@
 /*********
 GLOBAL SETTINGS & VARIBLES
 ***/
+const rp = require('request-promise');
+const cheerio = require('cheerio');
+
 const listArr = [];
-var	  ipArr = [],
-	  ExportArr = [];
-      Export = 0;
+var ipArr = [],
+    ExportArr = [];
+Export = 0;
 
 /*********
 GLOBAL FUNCTIONS
@@ -53,17 +56,17 @@ function ASIC_SCANNER(network_range, last) {
                 }
                 // ASIC NUM == 0 on the network                 
                 if (ipArr.length == 0) {
-                 // Run only GUI mod
-                 if (!process.argv.includes("console")) {
-                 $("#hideOnNull").hide();
-                 $("#scanAgain").hide();
-                 $("#numDevices").text("0 devices");
-                 $("#export").text("Try Again");
-                    setTimeout(function() { // Show new screen
-                        $('#step3').hide();
-                        $('#step4').show();
-                    }, 500);
-                }
+                    // Run only GUI mod
+                    if (!process.argv.includes("console")) {
+                        $("#hideOnNull").hide();
+                        $("#scanAgain").hide();
+                        $("#numDevices").text("0 devices");
+                        $("#export").text("Try Again");
+                        setTimeout(function() { // Show new screen
+                            $('#step3').hide();
+                            $('#step4').show();
+                        }, 500);
+                    }
                 }
             }
             return true;
@@ -116,53 +119,87 @@ function ASIC_TCP(workerIP, asicNum) {
 }
 
 function ASIC_TESTER(workerIP, response, asicNum) {
-    Export++;
-    if (response != "timeout") {
-        var data = response.toString().trim();
-        data = data.split("User"),
-            data = data[1].split(',')[0].replace("=", "");
 
-        if (data.toString().includes(".")) {
-            // WORKER NAME DETECTED
-            data = data.split('.')[1];
+    // Test for HOSTNAME
+    const rpjson = {
+        uri: 'http://' + workerIP,
+        auth: {
+            'user': 'root',
+            'pass': 'root',
+            'sendImmediately': false
+        },
+        transform: false,
+        header: {
+            'Accept': 'application/json'
+        },
+        json: true
+    };
+
+
+    rpjson.uri = 'http://' + workerIP + '/cgi-bin/get_system_info.cgi';
+    rp(rpjson).promise().bind()
+        .then(function(resp) {
+            // REQUEST SUCCEEDED: DO SOMETHING
+            //console.log(resp);
+            var antStats = {};
+            antStats.hostname = resp.hostname;
+            jobDone(workerIP, response, asicNum, antStats.hostname);
+        })
+
+    function jobDone(workerIP, response, asicNum, asicHostname) {
+        Export++;
+        if (response != "timeout") {
+            var data = response.toString().trim();
+            data = data.split("User"),
+                data = data[1].split(',')[0].replace("=", "");
+
+            if (data.toString().includes(".")) {
+                // WORKER NAME DETECTED
+                data = data.split('.')[1];
+            } else {
+                data = "";
+            }
         } else {
-            data = "";
-        }
-    } else {
-        var data = "";
-    }
-
-    // Add to the list, this will be exported
-    const workerData = {
-    	"worker": data,
-        "type": "asic",
-        "ip": workerIP
-    }
-    ExportArr.push(workerData);
-
-    // If match that means sync is done
-    if (Export == asicNum) {
-		if (!process.argv.includes("console")) {
-        // Run only GUI mod
-        $("#export").text("Export");
-		$("#hideOnNull").show();
-		$("#scanAgain").show();		
-		$("#numDevices").text(asicNum.toString() + " devices");
-        setTimeout(function() { // Show new screen
-            $('#step3').hide();
-            $('#step4').show();
-        }, 500);
-        } else {
-        // Run only on Console Mod
-        	console.log("*** JSON RESPONSE ***");
-        	console.log("");
-        	console.log(ExportArr);
-        	console.log("");
-        	console.log("Copy this to a .json file and you will able to import to minerstat.com");
-        	process.exit()
+            var data = "";
         }
 
+        if (asicHostname.toLowerCase() != "antminer" || data == "") {
+            data = asicHostname;
+        }
+
+        // Add to the list, this will be exported
+        const workerData = {
+            "worker": data,
+            "type": "asic",
+            "ip": workerIP
+        }
+        ExportArr.push(workerData);
+
+        // If match that means sync is done
+        if (Export == asicNum) {
+            if (!process.argv.includes("console")) {
+                // Run only GUI mod
+                $("#export").text("Export");
+                $("#hideOnNull").show();
+                $("#scanAgain").show();
+                $("#numDevices").text(asicNum.toString() + " devices");
+                setTimeout(function() { // Show new screen
+                    $('#step3').hide();
+                    $('#step4').show();
+                }, 500);
+            } else {
+                // Run only on Console Mod
+                console.log("*** JSON RESPONSE ***");
+                console.log("");
+                console.log(ExportArr);
+                console.log("");
+                console.log("Copy this to a .json file and you will able to import to minerstat.com");
+                process.exit()
+            }
+
+        }
     }
+
 
 }
 
@@ -182,22 +219,22 @@ function discovery() {
 
 if (process.argv.includes("console")) {
 
-	const readline = require('readline');
-	const rl = readline.createInterface({
-                input: process.stdin,
-                output: process.stdout
+    const readline = require('readline');
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
     });
 
-	console.log("");
-	console.log("How to use?");
-	console.log("Enter first 3 part of your local network. e.g: 192.168.0");
-	
-	rl.question('IP: ', (ipMask) => {
-	console.log("");
-    rl.close();
-    
-	WAITING_LIST(ipMask + ".X".replace(/X/gi, "0") + "/19");
-	setTimeout(discovery, 1 * 1000);    
+    console.log("");
+    console.log("How to use?");
+    console.log("Enter first 3 part of your local network. e.g: 192.168.0");
+
+    rl.question('IP: ', (ipMask) => {
+        console.log("");
+        rl.close();
+
+        WAITING_LIST(ipMask + ".X".replace(/X/gi, "0") + "/19");
+        setTimeout(discovery, 1 * 1000);
 
     });
 }
