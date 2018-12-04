@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .",
     "package-mac": "electron-packager . locator --overwrite --platform=darwin --arch=x64 --icon=asset/logo.icns --prune=true --out=release-builds",
-    "package-win": "electron-packager . locator --overwrite --asar=true --platform=win32 --arch=ia32 --icon=asset/logo.ico --prune=true --out=release-builds --version-string.CompanyName=\"minerstat OÜ\" --version-string.FileDescription=\"Locator\" --version-string.ProductName=\"locator\"",
+    "package-win": "electron-packager . locator --overwrite --asar=true --platform=win32 --arch=ia32 --icon=asset/logo.ico --prune=true --out=release-builds --version-string.CompanyName=\"minerstat OÜ\" --version-string.FileDescription=\"locator\" --version-string.ProductName=\"locator\"",
     "package-linux": "electron-packager . locator --overwrite --asar=true --platform=linux --arch=x64 --icon=asset/1024x1024.png --prune=true --out=release-builds",
     "package-pi": "electron-packager . locator --overwrite --asar=true --platform=linux --arch=armv7l --icon=asset/1024x1024.png --prune=true --out=release-builds"
   },
@@ -28,6 +28,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "colors": "^1.3.2",
+    "event-stream": "^3.3.4",
     "evilscan": "^1.7.1",
     "internal-ip": "^3.0.1",
     "net": "^1.0.2",
