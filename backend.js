@@ -236,7 +236,7 @@ if (process.argv.includes("console")) {
         console.log("");
         rl.close();
 
-        WAITING_LIST(ipMask + ".X".replace(/X/gi, "0") + "/19");
+        WAITING_LIST(ipMask + ".X".replace(/X/gi, "0") + "/17");
         setTimeout(discovery, 1 * 1000);
 
     });
