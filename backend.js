@@ -121,7 +121,7 @@ function ASIC_TCP(workerIP, asicNum) {
 function ASIC_TESTER(workerIP, response, asicNum) {
 
     // Test for HOSTNAME
-    const rpjson = {
+/*    const rpjson = {
         uri: 'http://' + workerIP,
         auth: {
             'user': 'root',
@@ -145,6 +145,9 @@ function ASIC_TESTER(workerIP, response, asicNum) {
             antStats.hostname = resp.hostname;
             jobDone(workerIP, response, asicNum, antStats.hostname);
         })
+
+*/
+    jobDone(workerIP, response, asicNum, "");
 
     function jobDone(workerIP, response, asicNum, asicHostname) {
         Export++;
