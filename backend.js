@@ -35,7 +35,7 @@ function ASIC_SCANNER(network_range, last) {
         var evilscan = require('evilscan'),
             options = {
                 target: network_range,
-                port: '22,4028',
+                port: '22,80',
                 status: 'O',
                 banner: true
             },
