@@ -591,18 +591,18 @@ body {
 }
 
 .splash .logo {
-  background: url("../images/logo.svg") no-repeat;
-  background-size: 232px 80px;
+  background: url("../images/splash-logo.svg") no-repeat;
+  background-size: 90px 90px;
   background-position: 0 0;
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   margin: 0 auto 0 auto;
   animation: scanning 2s infinite linear;
 }
 
 .splash h1 {
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   margin: 12px auto 0 auto;
 }
