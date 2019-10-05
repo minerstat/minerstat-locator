@@ -1,6 +1,6 @@
 {
   "name": "minerstat-locator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Export ASIC IP & Worker names for minerstat",
   "main": "main.js",
   "scripts": {
