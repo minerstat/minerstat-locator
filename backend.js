@@ -121,30 +121,24 @@ function ASIC_TCP(workerIP, asicNum) {
 function ASIC_TESTER(workerIP, response, asicNum) {
 
   var systemType = "";
-  jobDone(workerIP, response, asicNum, "");
 
-  /*
   if (!process.argv.includes("console")) {
-    $.ajax({
-      url: 'http://' + workerIP,
-      type: 'GET',
-      success: function(res) {
-        var data = res;
-        console.log(data);
-        if (data.includes("AsicMiner")) {
-          systemType = "innosilicon";
+    $.get("http://" + workerIP, function(data, status) {
+      if (status == "success") {
+        var check = data.includes("AsicMiner");
+        if (check) {
+          systemType = 'innosilicon';
         }
-        console.log(systemType);
-        jobDone(workerIP, response, asicNum, "");
-      },
-      error: function(res) {
-        jobDone(workerIP, response, asicNum, "");
       }
+      jobDone(workerIP, response, asicNum, "", systemType);
+    }).fail(function() {
+      jobDone(workerIP, response, asicNum, "", systemType);
     });
   } else {
-
+    jobDone(workerIP, response, asicNum, "", systemType);
   }
 
+  /*
   // Test for HOSTNAME
    const rpjson = {
           uri: 'http://' + workerIP,
@@ -175,7 +169,7 @@ function ASIC_TESTER(workerIP, response, asicNum) {
   // test for Innosilicon
   // <title>AsicMiner</title>
 
-  function jobDone(workerIP, response, asicNum, asicHostname) {
+  function jobDone(workerIP, response, asicNum, asicHostname, sysType) {
     Export++;
     if (response != "timeout") {
       var data = response.toString().trim();
@@ -207,9 +201,10 @@ function ASIC_TESTER(workerIP, response, asicNum) {
     const workerData = {
       "worker": data,
       "type": "asic",
+      "system": sysType,
       "ip": workerIP
     }
-    //       "system": systemType,
+    //
     ExportArr.push(workerData);
 
     console.log(ExportArr);
