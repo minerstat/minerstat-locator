@@ -2,7 +2,7 @@
 
 # Test against these versions of Io.js and Node.js.
 environment:
-  nodejs_version: "9"
+  nodejs_version: "11"
 
 # Install scripts. (runs after repo cloning)
 install:
