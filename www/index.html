@@ -44,7 +44,7 @@
 					<label>.</label>
 					<input id="block16" type="text" maxlength="3" value="168">
 					<label>.</label>
-					<input id="block24" type="text" maxlength="3" value="0">
+					<input id="block24" type="text" maxlength="3" value="X">
 					<label>.</label>
 					<input id="block32" type="text" disabled="disabled" value="X">
 				</div>
@@ -104,7 +104,7 @@
 			const internalIp = require('internal-ip');
 			var IP_PART1 = "192",
 				IP_PART2 = "168",
-				IP_PART3 = "0";
+				IP_PART3 = "X";
 			internalIp.v4().then(ip => {
 				console.log(ip);
 				//=> '10.0.0.79'
