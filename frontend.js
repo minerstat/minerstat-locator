@@ -67,8 +67,15 @@ $(function() {
 		IP_PART2 = $('#block16').val();
 		IP_PART3 = $('#block24').val();
 		// Find all device
-		WAITING_LIST(IP_PART1 + "." + IP_PART2 + "." + IP_PART3 + ".X".replace(/X/gi, "0") + "/17");
-		setTimeout(discovery, 1 * 1000);
+	    
+	    	if (IP_PART3.toString().includes("X")) {
+			// searching /17 with 32,766 ip address. (around 1-5 minute search time)
+			WAITING_LIST(IP_PART1 + "." + IP_PART2 + "." + IP_PART3 + ".X".replace(/X/gi, "0") + "/17");
+		} else {
+			// searching /24 as it is defined 254 ip. (really fast method)
+			WAITING_LIST(IP_PART1 + "." + IP_PART2 + "." + IP_PART3 + ".0" + "/24");
+		}
+	    	setTimeout(discovery, 1 * 1000);
 		
     });
 
