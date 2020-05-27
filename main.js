@@ -4,6 +4,7 @@
 var path = require('path'),
   url = require('url'),
   colors = require('colors');
+var request = require('request');
 
 /*
 	ELECTRON (GUI)
@@ -48,7 +49,7 @@ if (!process.argv.includes("console")) {
       icon: path.join(__dirname, 'asset/96x96.png')
     })
     // Show Debug Tools
-    //mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools({mode:'undocked'})
     // and load the index.html for minerstat.
     mainWindow.loadURL(url.format({
       pathname: path.join(__dirname, 'www/splash.html'),

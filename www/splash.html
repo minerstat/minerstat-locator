@@ -35,6 +35,26 @@
 	<script>
 		function updateIndicator() {
 			if (navigator.onLine) {
+			
+
+			var Export = 0;
+			var ipArr = [],
+				ExportArr = [];
+			const internalIp = require('internal-ip');
+			var IP_PART1 = "192",
+				IP_PART2 = "168",
+				IP_PART3 = "X";
+			internalIp.v4().then(ip => {
+				console.log(ip);
+				//=> '10.0.0.79'
+				var IP = ip.split(".");
+				IP_PART1 = IP[0];
+				IP_PART2 = IP[1];
+				IP_PART3 = IP[2];
+				console.log(IP[0]);
+			});
+
+			
 				parent.window.location.href = "index.html";
 			} else {
 				var mainButton = document.getElementById("altText");

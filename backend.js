@@ -3,11 +3,13 @@ GLOBAL SETTINGS & VARIBLES
 ***/
 const rp = require('request-promise');
 const cheerio = require('cheerio');
+var request = require( 'request' ).defaults({rejectUnauthorized:false,requestCert: false,agent: false});
 
 const listArr = [];
 var ipArr = [],
     ExportArr = [];
 Export = 0;
+
 
 /*********
 GLOBAL FUNCTIONS
@@ -122,47 +124,47 @@ function ASIC_TESTER(workerIP, response, asicNum) {
 
     var systemType = "";
 
-    if (!process.argv.includes("console")) {
-
-
-        $.get("http://" + workerIP, function(data, status) {
-            if (status == "success") {
+	console.log("1");
+	
+    if (!process.argv.includes("console")) {	
+		console.log("2");
+	    request.get("http://" + workerIP, function(error, responseR, data) {
+				console.log("3" + error + " " + responseR);
+            if (error === null) {
                 var check = data.includes("AsicMiner");
                 if (check) {
                     systemType = 'innosilicon';
                     jobDone(workerIP, response, asicNum, "", systemType);
                 } else {
-                    $.get("https://" + workerIP + "/cgi-bin/luci", function(dataw, statusw) {
-                        if (statusw == "success") {
+					request.get("https://" + workerIP + "/cgi-bin/luci", function(errorw, responseR, dataw) {
+											console.log("5" + errorw + " " + responseR);
+                        if (errorw === null) {
                             var checkw = dataw.includes("WhatsMiner");
+													console.log(dataw);
                             if (checkw) {
                                 systemType = 'whatsminer';
-                                jobDone(workerIP, response, asicNum, "", systemType);
                             }
+							jobDone(workerIP, response, asicNum, "", systemType);
                         } else {
+							console.log("5");
                             jobDone(workerIP, response, asicNum, "", systemType);
                         }
-                    }).fail(function() {
-                        jobDone(workerIP, response, asicNum, "", systemType);
                     });
                 }
             } else {
-                $.get("https://" + workerIP + "/cgi-bin/luci", function(dataw, statusw) {
-                    if (statusw == "success") {
+                request.get("https://" + workerIP + "/cgi-bin/luci", function(errorw, responseR, dataw) {
+					console.log("6" + errorw + " " + responseR);
+                    if (errorw === null) {
                         var checkw = dataw.includes("WhatsMiner");
                         if (checkw) {
                             systemType = 'whatsminer';
-                            jobDone(workerIP, response, asicNum, "", systemType);
                         }
+						jobDone(workerIP, response, asicNum, "", systemType);
                     } else {
                         jobDone(workerIP, response, asicNum, "", systemType);
                     }
-                }).fail(function() {
-                    jobDone(workerIP, response, asicNum, "", systemType);
                 });
             }
-        }).fail(function() {
-            jobDone(workerIP, response, asicNum, "", systemType);
         });
 
 
@@ -204,6 +206,10 @@ function ASIC_TESTER(workerIP, response, asicNum) {
     function jobDone(workerIP, response, asicNum, asicHostname, sysType) {
         Export++;
         var data = "";
+		if (typeof response == 'undefined') {
+			response = "timeout";
+		}
+		
         if (response != "timeout") {
             data = response.toString().trim();
             data = data.split("User"),
