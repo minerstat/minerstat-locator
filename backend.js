@@ -236,13 +236,27 @@ function ASIC_TESTER(workerIP, response, asicNum) {
             data = sub + "X" + last;
         }
 
+	// make login default
+        var login = "root";
+        var passw = "root";
+
+	if (sysType == "whatsminer") {
+		login = "admin";
+		passw = "admin";
+	}
+
+	if (sysType == "innosilicon") {
+		login = "admin";
+		passw = "admin";
+	}
+
         // Add to the list, this will be exported
         const workerData = {
             "worker": data,
             "type": "asic",
             "system": sysType,
-	    "ssh-username": "root",
-	    "ssh-password": "admin",
+	    "ssh-username": login,
+	    "ssh-password": passw",
             "ip": workerIP
         }
         //
