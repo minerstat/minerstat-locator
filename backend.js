@@ -256,7 +256,7 @@ function ASIC_TESTER(workerIP, response, asicNum) {
             "type": "asic",
             "system": sysType,
 	    "ssh-username": login,
-	    "ssh-password": passw",
+	    "ssh-password": passw,
             "ip": workerIP
         }
         //
