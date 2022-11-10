@@ -23,7 +23,7 @@
   "author": "minerstat OU",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^2.0.18"
+    "electron": "^18.3.7"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
